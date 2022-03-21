@@ -113,6 +113,44 @@ endmodule
 
 
 
+module tbparkingsystem;
+reg clk;
+reg reset;
+reg sensor_ent;
+reg sensor_exit;
+reg [1:0]password1;
+reg [1:0]password2;
+wire greenled;
+wire redled;
+wire [6:0]hex1;
+wire [6:0]hex2;
+
+tbparkingsystem uut(.clk(clk),.reset(reset),.sensor_ent(sensor_ent),.sensor_exit(sensor_exit),.password1(password1),.password2(password2),.greenled(greenled),.redled(redled),.hex1(hex1),.hex2(hex2)); 
+initial begin
+clk=0;
+forever #10 clk=~clk;
+end
+initial begin
+reset=0;
+sensor_ent=0;
+sensor_exit=0;
+password1=0;
+password2=0;
+#100;
+reset=1;
+#20;
+sensor_ent=1;
+#100;
+sensor_ent=0;
+password1=1;
+password2=2;
+#2000;
+sensor_exit=1;
+end
+endmodule
+
+
+
 
 
 
